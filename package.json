@@ -1,0 +1,22 @@
+{
+  "name": "legacy-api-promises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "wrap-promise": "braintree/wrap-promise"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
