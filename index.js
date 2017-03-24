@@ -34,6 +34,10 @@ class LegacyClass {
     return Promise.resolve('foo');
   }
 
+  syncMethod (shouldSuceed) {
+    return shouldSuceed;
+  }
+
   asyncMethod (shouldSucceed) {
     return randoHelper.asyncHelperMethod(shouldSucceed)
   }
