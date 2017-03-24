@@ -4,6 +4,16 @@ let MyLegacyApi = require('..')
 let assert = require('assert')
 
 describe('An legacy API with bolted on promise support', () => {
+  it('ignores static methods', () => {
+    var promise = MyLegacyApi.staticMethod(() => {});
+
+    // static methods are ignored, so it should
+    // should be undefined if a callback was passed
+    // we confirm that it does not work with static
+    // methods by checking that it's a promise
+    assert.ok(promise instanceof Promise);
+  });
+
   context('callbacks', () => {
     it('happy path', (done) => {
       let api = new MyLegacyApi
