@@ -2,7 +2,11 @@
 
 let wrapPromise = require('wrap-promise')
 
-function wrapClass (target, methods) {
+function wrapClass (target) {
+  let methods = Object.getOwnPropertyNames(target.prototype).filter((prop) => {
+    return prop !== 'constructor';
+  });
+
   methods.forEach((method) => {
     let original = target.prototype[method]
     target.prototype[method] = wrapPromise(original)
@@ -26,6 +30,14 @@ let randoHelper = {
 }
 
 class LegacyClass {
+  static staticMethod () {
+    return Promise.resolve('foo');
+  }
+
+  syncMethod (shouldSuceed) {
+    return shouldSuceed;
+  }
+
   asyncMethod (shouldSucceed) {
     return randoHelper.asyncHelperMethod(shouldSucceed)
   }
@@ -35,7 +47,4 @@ class LegacyClass {
   }
 }
 
-module.exports = wrapClass(LegacyClass, [
-  'asyncMethod',
-  'asyncMethodTwo'
-])
+module.exports = wrapClass(LegacyClass)
